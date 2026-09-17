@@ -4,32 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HelloBaba - Transport</title>
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              pink: '#FDE2E4',
-              pinkDark: '#E8B4B8',
-              blue: '#E0F2FE',
-              blueDark: '#0284C7',
-              accent: '#38BDF8',
-              text: '#1E293B'
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    .step-content { display: none; }
-    .step-content.active { display: block; }
-  </style>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gradient-to-br from-brand-pink via-white to-brand-blue min-h-screen text-brand-text flex flex-col font-sans">
 
@@ -38,7 +20,7 @@
     <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center gap-2">
         <div class="p-2 bg-brand-blue rounded-xl text-brand-blueDark">
-          <i class="ph-bold ph-bus text-2xl"></i>
+          <img src="assets/logo/logo.jpeg" onerror="this.src='https://via.placeholder.com/32'" alt="HelloBaba Logo" class="w-8 h-8 rounded-full object-cover">
         </div>
         <span class="font-bold text-xl tracking-tight text-slate-800">HelloBaba <span class="text-brand-blueDark">Transport</span></span>
       </div>
@@ -140,7 +122,6 @@
             </div>
           </div>
 
-          <!-- Feature 2: Pre-selected Schools Dropdown -->
           <div>
             <label class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1" for="school-name">School / Campus *</label>
             <select id="school-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-accent transition text-sm text-slate-700">
@@ -151,7 +132,7 @@
               <option value="Delta School Windhoek">Delta School Windhoek</option>
               <option value="Holy Cross Convent School">Holy Cross Convent School</option>
               <option value="Windhoek Gymnasium">Windhoek Gymnasium</option>
-              <option value="Pioneer Boys Primary School">Suiderhof Primary School</option>
+              <option value="Suiderhof Primary School">Suiderhof Primary School</option>
               <option value="Other">Other (Specify in notes below)</option>
             </select>
           </div>
@@ -182,7 +163,6 @@
             <p class="text-xs text-slate-500">Customize the routing plan to match your weekly family schedule.</p>
           </div>
 
-          <!-- Service Type Selection -->
           <div>
             <label class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-2">Service Type *</label>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -215,7 +195,6 @@
             </div>
           </div>
 
-          <!-- Frequency / Days Selection -->
           <div>
             <label class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-2">Weekly Frequency *</label>
             <div class="flex flex-wrap gap-2">
@@ -237,14 +216,13 @@
             </div>
           </div>
 
-          <!-- Preferred Start Date -->
           <div>
             <label class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1" for="start-date">Preferred Service Start Date *</label>
             <input type="date" id="start-date" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-accent transition text-sm">
           </div>
         </div>
 
-        <!-- Feature 3: STEP 4: Payment Option & Checkout -->
+        <!-- STEP 4: Payment Option & Checkout -->
         <div id="step-4" class="step-content space-y-4">
           <div class="border-b border-slate-100 pb-3">
             <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
@@ -253,7 +231,6 @@
             <p class="text-xs text-slate-500">Select how you would like to handle monthly subscription billing.</p>
           </div>
 
-          <!-- Price Summary Box -->
           <div class="bg-gradient-to-r from-brand-pink/40 to-brand-blue/40 border border-brand-pinkDark/30 rounded-xl p-4 flex justify-between items-center">
             <div>
               <span class="text-xs font-semibold text-slate-600 uppercase tracking-wide block">Estimated Monthly Fee</span>
@@ -268,7 +245,7 @@
             <label class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-2">Select Payment Method *</label>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label class="cursor-pointer">
-                <input type="radio" name="payment-method" value="Card" checked onclick="togglePaymentFields('card')" class="peer sr-only">
+                <input type="radio" name="payment-method" value="Card" checked id="pay-card-option" class="peer sr-only">
                 <div class="p-4 border border-slate-200 rounded-xl peer-checked:border-brand-blueDark peer-checked:bg-brand-blue/30 transition flex items-center gap-3">
                   <i class="ph-bold ph-cardholder text-2xl text-brand-blueDark"></i>
                   <div>
@@ -279,7 +256,7 @@
               </label>
 
               <label class="cursor-pointer">
-                <input type="radio" name="payment-method" value="EFT" onclick="togglePaymentFields('eft')" class="peer sr-only">
+                <input type="radio" name="payment-method" value="EFT" id="pay-eft-option" class="peer sr-only">
                 <div class="p-4 border border-slate-200 rounded-xl peer-checked:border-brand-blueDark peer-checked:bg-brand-blue/30 transition flex items-center gap-3">
                   <i class="ph-bold ph-bank text-2xl text-brand-blueDark"></i>
                   <div>
@@ -291,25 +268,23 @@
             </div>
           </div>
 
-          <!-- Card Details Input Container (Simulated Payment Fields) -->
           <div id="card-fields" class="space-y-3 pt-2">
             <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1" for="card-num">Card Number</label>
-              <input type="text" id="card-num" placeholder="4532 •••• •••• 8921" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-accent transition text-sm">
+              <label class="block text-xs font-semibold text-slate-700 mb-1" for="card-num">Card Number *</label>
+              <input type="text" id="card-num" required placeholder="4532 •••• •••• 8921" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-accent transition text-sm">
             </div>
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1" for="card-expiry">Expiry Date</label>
-                <input type="text" id="card-expiry" placeholder="MM/YY" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-accent transition text-sm">
+                <label class="block text-xs font-semibold text-slate-700 mb-1" for="card-expiry">Expiry Date *</label>
+                <input type="text" id="card-expiry" required placeholder="MM/YY" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-accent transition text-sm">
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1" for="card-cvv">CVC / CVV</label>
-                <input type="password" id="card-cvv" maxlength="4" placeholder="123" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-accent transition text-sm">
+                <label class="block text-xs font-semibold text-slate-700 mb-1" for="card-cvv">CVC / CVV *</label>
+                <input type="password" id="card-cvv" required maxlength="4" placeholder="123" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-accent transition text-sm">
               </div>
             </div>
           </div>
 
-          <!-- EFT Info Container -->
           <div id="eft-fields" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1">
             <p class="font-bold text-slate-800">Bank Details for Transfer:</p>
             <p>Bank: First National Bank</p>
@@ -358,132 +333,14 @@
         <button id="whatsapp-trigger-btn" class="w-full py-3 px-4 bg-emerald-500 text-white rounded-xl text-sm font-semibold hover:bg-emerald-600 transition flex items-center justify-center gap-2 shadow-sm">
           <i class="ph-bold ph-whatsapp-logo text-lg"></i> Send Copy via WhatsApp
         </button>
-        <button onclick="closeModal()" class="w-full py-2.5 px-4 bg-slate-100 text-slate-700 rounded-xl text-sm font-semibold hover:bg-slate-200 transition">
+        <button id="close-modal-btn" class="w-full py-2.5 px-4 bg-slate-100 text-slate-700 rounded-xl text-sm font-semibold hover:bg-slate-200 transition">
           Done
         </button>
       </div>
     </div>
   </div>
 
-  <!-- JavaScript Logic -->
-  <script>
-    let currentStep = 1;
-    const totalSteps = 4;
-
-    const form = document.getElementById('transport-form');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const submitBtn = document.getElementById('submit-btn');
-    const progressBar = document.getElementById('progress-bar');
-    const stepIndicatorText = document.getElementById('step-indicator-text');
-    const stepPercentage = document.getElementById('step-percentage');
-    const modal = document.getElementById('confirmation-modal');
-
-    // Toggle Card vs EFT view
-    function togglePaymentFields(type) {
-      const cardFields = document.getElementById('card-fields');
-      const eftFields = document.getElementById('eft-fields');
-
-      if (type === 'card') {
-        cardFields.classList.remove('hidden');
-        eftFields.classList.add('hidden');
-      } else {
-        cardFields.classList.add('hidden');
-        eftFields.classList.remove('hidden');
-      }
-    }
-
-    // Navigation Controls
-    nextBtn.addEventListener('click', () => {
-      if (validateCurrentStep(currentStep)) {
-        if (currentStep < totalSteps) {
-          currentStep++;
-          updateStepView();
-        }
-      }
-    });
-
-    prevBtn.addEventListener('click', () => {
-      if (currentStep > 1) {
-        currentStep--;
-        updateStepView();
-      }
-    });
-
-    submitBtn.addEventListener('click', () => {
-      if (validateCurrentStep(currentStep)) {
-        submitForm();
-      }
-    });
-
-    function updateStepView() {
-      document.querySelectorAll('.step-content').forEach((el, index) => {
-        el.classList.toggle('active', index + 1 === currentStep);
-      });
-
-      prevBtn.classList.toggle('hidden', currentStep === 1);
-      nextBtn.classList.toggle('hidden', currentStep === totalSteps);
-      submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
-
-      const percentage = Math.round((currentStep / totalSteps) * 100);
-      progressBar.style.width = `${percentage}%`;
-      stepPercentage.textContent = `${percentage}% Completed`;
-
-      const stepTitles = ["Parent Details", "Child Details", "Schedule & Services", "Payment Option"];
-      stepIndicatorText.textContent = `Step ${currentStep} of ${totalSteps}: ${stepTitles[currentStep - 1]}`;
-
-      for (let i = 1; i <= totalSteps; i++) {
-        const tab = document.getElementById(`step-tab-${i}`);
-        if (i <= currentStep) {
-          tab.className = "text-brand-blueDark font-bold flex flex-col sm:flex-row items-center justify-center gap-1";
-        } else {
-          tab.className = "text-slate-400 flex flex-col sm:flex-row items-center justify-center gap-1";
-        }
-      }
-    }
-
-    function validateCurrentStep(step) {
-      const container = document.getElementById(`step-${step}`);
-      const inputs = container.querySelectorAll('input[required], select[required]');
-      let isValid = true;
-
-      inputs.forEach(input => {
-        if (!input.checkValidity()) {
-          input.reportValidity();
-          isValid = false;
-        }
-      });
-
-      return isValid;
-    }
-
-    function submitForm() {
-      const parentName = document.getElementById('parent-name').value;
-      const childName = document.getElementById('child-name').value;
-      const schoolName = document.getElementById('school-name').value;
-      const phone = document.getElementById('parent-phone').value;
-
-      // Open Modal
-      modal.classList.remove('hidden');
-
-      // WhatsApp Share Trigger
-      const whatsappBtn = document.getElementById('whatsapp-trigger-btn');
-      whatsappBtn.onclick = () => {
-        const message = encodeURIComponent(
-          `Hello! I have registered my child ${childName} for transport to ${schoolName}. Contact: ${parentName} (${phone}).`
-        );
-        window.open(`https://wa.me/?text=${message}`, '_blank');
-      };
-
-      // Feature 1: Reset the form fields once submission is completed
-      form.reset();
-    }
-
-    function closeModal() {
-      modal.classList.add('hidden');
-      currentStep = 1;
-      updateStepView();
-    }
-  </script>
+  <!-- Custom JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>

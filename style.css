@@ -1,0 +1,19 @@
+@layer base {
+  :root {
+    --brand-pink: #FDE2E4;
+    --brand-pinkDark: #E8B4B8;
+    --brand-blue: #E0F2FE;
+    --brand-blueDark: #0284C7;
+    --brand-accent: #38BDF8;
+    --brand-text: #1E293B;
+  }
+}
+
+/* Stepper View Visibility Controls */
+.step-content { 
+  display: none; 
+}
+
+.step-content.active { 
+  display: block; 
+}
